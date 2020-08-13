@@ -89,7 +89,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     internal var isMessagesControllerBeingDismissed: Bool = false
 
-    internal var messageCollectionViewBottomInset: CGFloat = 0 {
+    open var messageCollectionViewBottomInset: CGFloat = 0 {
         didSet {
              UIView.performWithoutAnimation {
                  messagesCollectionView.contentInset.bottom = messageCollectionViewBottomInset
