@@ -2,6 +2,80 @@
 
 The changelog for `MessageKit`. Also see the [releases](https://github.com/MessageKit/MessageKit/releases) on GitHub.
 
+## Future release
+
+### Fixed
+
+### Added
+
+### Changed
+
+### Removed
+
+## 3.5.0
+
+### Fixed
+
+- maintainPositionOnKeyboardFrameChanged for small contentSize would scroll content out of bounds [#1506](https://github.com/MessageKit/MessageKit/pull/1506) by [@martinpucik](https://github.com/martinpucik)
+
+### Added
+
+### Changed
+
+- Changed `resources` to `resource_bundle` in MessageKit.podspec [#1460](https://github.com/MessageKit/MessageKit/pull/1460) by [@martinpucik](https://github.com/martinpucik)
+- Changed dependency manager for Example project to SPM [#1504](https://github.com/MessageKit/MessageKit/pull/1504) by [@martinpucik](https://github.com/martinpucik)
+- Deprecated `messagesCollectionView.scrollToBottom` and `scrollsToBottomOnKeyboardBeginsEditing` in favor of `messagesCollectionView.scrollToLastItem` and `scrollsToLastItemOnKeyboardBeginsEditing`. This will be removed in a future release [#1505](https://github.com/MessageKit/MessageKit/pull/1505) by [@martinpucik](https://github.com/martinpucik)
+
+### Removed
+
+## 3.4.2
+
+- Updated `InputBarAccessoryView` to 5.2.1 with fixed warning on XCode 12 when used via SPM
+
+## 3.4.1
+
+### Fixed
+
+- Fixes an issue with casting MessageType to a custom type when using LinkPreview cells [#1469](https://github.com/MessageKit/MessageKit/pull/1469) by [@kinoroy](https://github.com/kinoroy)
+
+- Fixes an issue where the MessagesViewController keyboard observers were not cleaned up when MessagesViewController was no longer visible on screen [#1476](https://github.com/MessageKit/MessageKit/pull/1476) by [@kinoroy](https://github.com/kinoroy)
+
+## 3.4.0
+
+### Changed
+
+- **Breaking Change** Dropped support for iOS 11, added support for Swift 5.3 SPM and XCode 12 [#1464](https://github.com/MessageKit/MessageKit/pull/1464) by [@kaspik](https://github.com/kaspik)
+
+## 3.3.0
+
+### Fixed
+
+- Fixes missing insets for link preview messages [#1447](https://github.com/MessageKit/MessageKit/pull/1447) by [@bguidolim](https://github.com/bguidolim)
+
+### Added
+
+- Show message time by swiping left over the chat controller. [#1444](https://github.com/MessageKit/MessageKit/pull/1444) by [@amirpirzad](https://github.com/amirpirzad)
+
+## 3.2.0
+
+### Fixed
+
+- Fixes an incorrect animation of message cells while dragging to dismiss the keyboard [#1433](https://github.com/MessageKit/MessageKit/pull/1433) by [@lhr000lhrmega](https://github.com/lhr000lhrmega)
+- Fixes an issue where the video message playback icon was too dark when in dark mode [#1386](https://github.com/MessageKit/MessageKit/pull/1386) by [@kinoroy](https://github.com/kinoroy)
+- Fixes an issue where the video message playback button triangle was not centered within the circle [#1386](https://github.com/MessageKit/MessageKit/pull/1386) by [@kinoroy](https://github.com/kinoroy)
+
+### Added
+
+- Added option to use Photo messages with remote image URL in Example project [#1294](https://github.com/MessageKit/MessageKit/pull/1294) by [@martinpucik](https://github.com/martinpucik)
+- **Breaking Change** Added new `linkPreview` message type, which display a subclass of `TextMessageCell` with support to present title, teaser and a thumbnail image for a link [#1310](https://github.com/MessageKit/MessageKit/pull/1310) by [@bguidolim](https://github.com/bguidolim)
+- Added a SwiftUI view using MessageKit in the Example Project by [#1410](https://github.com/MessageKit/MessageKit/pull/1410) [@kinoroy](https://github.com/kinoroy)
+
+### Changed
+
+- **Breaking Change** Dropped support for iOS 9 and iOS 10 [#1261](https://github.com/MessageKit/MessageKit/pull/1261) by [@kaspik](https://github.com/kaspik)
+- Converted internal, static colors into color assets to better support dark and high contrast modes [#1386](https://github.com/MessageKit/MessageKit/pull/1386) by [@kinoroy](https://github.com/kinoroy)
+- Change the video message playback button to use a UIVisualEffectsView to better match the look and feel of iMessage. [#1386](https://github.com/MessageKit/MessageKit/pull/1386) by [@kinoroy](https://github.com/kinoroy)
+
 ## 3.1.0
 
 ### Fixed
