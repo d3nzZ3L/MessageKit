@@ -225,7 +225,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecogni
     private func setupDefaults() {
         extendedLayoutIncludesOpaqueBars = true
         view.backgroundColor = .collectionViewBackground
-        messagesCollectionView.contentInsetAdjustmentBehavior = .never
         messagesCollectionView.keyboardDismissMode = .interactive
         messagesCollectionView.alwaysBounceVertical = true
         messagesCollectionView.backgroundColor = .collectionViewBackground
@@ -246,7 +245,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecogni
     open func setupConstraints() {
         messagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let top = messagesCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        let top = messagesCollectionView.topAnchor.constraint(equalTo: view.topAnchor)
         let bottom = messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         let leading = messagesCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         let trailing = messagesCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -352,25 +351,45 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecogni
 
         switch message.kind {
         case .text, .attributedText, .emoji:
-            let cell = messagesCollectionView.dequeueReusableCell(TextMessageCell.self, for: indexPath)
-            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-            return cell
+            if let cell = messagesDataSource.textCell(for: message, at: indexPath, in: messagesCollectionView) {
+                return cell
+            } else {
+                let cell = messagesCollectionView.dequeueReusableCell(TextMessageCell.self, for: indexPath)
+                cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+                return cell
+            }
         case .photo, .video:
-            let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
-            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-            return cell
+            if let cell = messagesDataSource.photoCell(for: message, at: indexPath, in: messagesCollectionView) {
+                return cell
+            } else {
+                let cell = messagesCollectionView.dequeueReusableCell(MediaMessageCell.self, for: indexPath)
+                cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+                return cell
+            }
         case .location:
-            let cell = messagesCollectionView.dequeueReusableCell(LocationMessageCell.self, for: indexPath)
-            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-            return cell
+            if let cell = messagesDataSource.locationCell(for: message, at: indexPath, in: messagesCollectionView) {
+                return cell
+            } else {
+                let cell = messagesCollectionView.dequeueReusableCell(LocationMessageCell.self, for: indexPath)
+                cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+                return cell
+            }
         case .audio:
-            let cell = messagesCollectionView.dequeueReusableCell(AudioMessageCell.self, for: indexPath)
-            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-            return cell
+            if let cell = messagesDataSource.audioCell(for: message, at: indexPath, in: messagesCollectionView) {
+                return cell
+            } else {
+                let cell = messagesCollectionView.dequeueReusableCell(AudioMessageCell.self, for: indexPath)
+                cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+                return cell
+            }
         case .contact:
-            let cell = messagesCollectionView.dequeueReusableCell(ContactMessageCell.self, for: indexPath)
-            cell.configure(with: message, at: indexPath, and: messagesCollectionView)
-            return cell
+            if let cell = messagesDataSource.contactCell(for: message, at: indexPath, in: messagesCollectionView) {
+                return cell
+            } else {
+                let cell = messagesCollectionView.dequeueReusableCell(ContactMessageCell.self, for: indexPath)
+                cell.configure(with: message, at: indexPath, and: messagesCollectionView)
+                return cell
+            }
         case .linkPreview:
             let cell = messagesCollectionView.dequeueReusableCell(LinkPreviewMessageCell.self, for: indexPath)
             cell.configure(with: message, at: indexPath, and: messagesCollectionView)
